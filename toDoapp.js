@@ -8,9 +8,9 @@ const inputToDo = document.createElement('input');
 const btnAdd = document.createElement('input');
 const btnClear = document.createElement('input');
 const divTask = document.createElement('div');
-const paragraph = document.createElement('p');
-const spanParag = document.createElement('span')
 const divBtns = document.createElement('div');
+const listTask = document.createElement('ul');
+
 
 
 body.appendChild(h1ToDo);
@@ -22,8 +22,8 @@ formToDo.appendChild(divBtns)
 divBtns.appendChild(btnAdd)
 divBtns.appendChild(btnClear)
 body.appendChild(divTask)
-divTask.appendChild(paragraph);
-paragraph.appendChild(spanParag);
+divTask.appendChild(listTask)
+
 
 body.style.backgroundColor = 'aqua'
 body.style.display = 'flex'
@@ -49,29 +49,42 @@ btnClear.type = 'button'
 
 let arrayTask = []
 
-function creaTask(taskValue, array) {
+function createTask(taskValue, array) {
+    let idTask = array.length
     let newTask = {
-        taskText : taskValue
+        id: idTask,
+        taskText: taskValue
     };
-    return array.unshift(newTask);
+    const itemList = document.createElement('li');
+    const spanList = document.createElement('span');
+    const btnDelete = document.createElement('input');
+    btnDelete.type = 'button';
+    btnDelete.value = 'Delete';
+    itemList.innerText = newTask.taskText;
+    itemList.appendChild(spanList)
+    spanList.appendChild(btnDelete);
+    listTask.insertBefore(itemList, listTask.firstChild)
     
+    return array.unshift(newTask);
+
 }
+btnAdd.addEventListener('click', () => {
+    createTask(inputToDo.value, arrayTask)
+})
 
-
-console.log(arrayTask);
 
 function deleteTask(taskValue, array) {
     let resultado = array.filter(task => task.taskText !== taskValue);
-    
+
     return resultado
 }
-
-arrayTask = deleteTask(taskUser, arrayTask)
-console.log(arrayTask);
+btnDelete.addEventListener('click', () => {
+    deleteTask()
+})
 
 function clear(array) {
-   return array = []
-    
+    return array = []
+
 }
 
 console.log(clear(arrayTask));
