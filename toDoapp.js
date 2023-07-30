@@ -17,42 +17,41 @@ body.appendChild(h1ToDo);
 body.appendChild(divForm);
 divForm.appendChild(formToDo);
 formToDo.appendChild(labelToDo);
-formToDo.appendChild(inputToDo)
-formToDo.appendChild(divBtns)
-divBtns.appendChild(btnAdd)
-divBtns.appendChild(btnClear)
-body.appendChild(divTask)
-divTask.appendChild(listTask)
+formToDo.appendChild(inputToDo);
+formToDo.appendChild(divBtns);
+divBtns.appendChild(btnAdd);
+divBtns.appendChild(btnClear);
+body.appendChild(divTask);
+divTask.appendChild(listTask);
 
 
-body.style.backgroundColor = 'aqua'
-body.style.display = 'flex'
-body.style.flexDirection = 'column'
-body.style.alignItems = 'center'
+body.style.backgroundColor = 'aqua';
+body.style.display = 'flex';
+body.style.flexDirection = 'column';
+body.style.alignItems = 'center';
 h1ToDo.innerText = 'ToDo-App';
-divForm.style.backgroundColor = 'lightblue'
-divForm.style.border = '2px solid black'
-divForm.style.padding = '2em 15em 2em 15em'
+divForm.style.backgroundColor = 'lightblue';
+divForm.style.border = '2px solid black';
+divForm.style.padding = '2em 15em 2em 15em';
 labelToDo.innerText = 'Type a new To-do:';
-inputToDo.type = 'text'
+inputToDo.type = 'text';
 formToDo.style.display = 'flex';
-formToDo.style.flexDirection = 'column'
-formToDo.style.alignItems = 'center'
+formToDo.style.flexDirection = 'column';
+formToDo.style.alignItems = 'center';
 formToDo.style.gap = '1.5em';
 divBtns.style.display = 'flex';
-divBtns.style.gap = '1em'
-btnAdd.type = 'button'
+divBtns.style.gap = '1em';
+btnAdd.type = 'button';
 btnAdd.value = 'Add';
 btnClear.value = 'Clear';
-btnClear.type = 'button'
+btnClear.type = 'button';
 
 
-let arrayTask = []
+let arrayTask = [];
 
 function createTask(taskValue, array) {
-    let idTask = array.length
+
     let newTask = {
-        id: idTask,
         taskText: taskValue
     };
     const itemList = document.createElement('li');
@@ -60,11 +59,17 @@ function createTask(taskValue, array) {
     const btnDelete = document.createElement('input');
     btnDelete.type = 'button';
     btnDelete.value = 'Delete';
+    spanList.style.paddingLeft = '2em'
+    btnDelete.addEventListener('click', () => {
+        deleteTask(newTask.taskText, array);
+        itemList.remove();
+    });
     itemList.innerText = newTask.taskText;
     itemList.appendChild(spanList)
     spanList.appendChild(btnDelete);
     listTask.insertBefore(itemList, listTask.firstChild)
-    
+
+
     return array.unshift(newTask);
 
 }
@@ -78,13 +83,12 @@ function deleteTask(taskValue, array) {
 
     return resultado
 }
-btnDelete.addEventListener('click', () => {
-    deleteTask()
-})
 
 function clear(array) {
-    return array = []
-
+    array = []
+    listTask.innerHTML = '';
 }
 
-console.log(clear(arrayTask));
+btnClear.addEventListener('click', () => {
+    clear(arrayTask);
+});
