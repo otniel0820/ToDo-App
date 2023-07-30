@@ -57,6 +57,7 @@ function createTask(taskValue, array) {
     const itemList = document.createElement('li');
     const spanList = document.createElement('span');
     const btnDelete = document.createElement('input');
+    itemList.style.paddingBottom = '1em'
     btnDelete.type = 'button';
     btnDelete.value = 'Delete';
     spanList.style.paddingLeft = '2em'
